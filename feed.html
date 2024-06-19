@@ -1,80 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Latest Post</title>
+    <title>Test Page</title>
     <style>
-        body {
-            font-family: Avenir, Arial, sans-serif;
-            margin: 20px;
-        }
-        .post {
-            display: flex;
-            align-items: flex-start;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-        .post img {
-            max-width: 400px;
-            height: auto;
-            margin-right: 20px;
-        }
-        .post div {
-            flex: 1;
-        }
-        .post h2 {
-            font-size: 24px;
-            margin: 0;
-        }
-        .post p {
-            margin: 10px 0;
-        }
-        .post .meta {
-            font-size: 14px;
-            color: #555;
-        }
-        .post a {
-            color: #00bf9a;
-            text-decoration: none;
-        }
-        .post a:hover {
-            text-decoration: underline;
-        }
-        @media (max-width: 600px) {
-            .post {
-                flex-direction: column;
-                align-items: center;
-            }
-            .post img {
-                margin-right: 0;
-                margin-bottom: 20px;
-                max-width: 100%;
-            }
-        }
+        body { font-family: Avenir, Arial, sans-serif; margin: 20px; text-align: center; }
+        h1 { color: #00bf9a; }
+        p { font-size: 18px; }
     </style>
 </head>
 <body>
-    <div id="post-container"></div>
-    <script>
-        fetch('https://script.google.com/macros/s/AKfycbwhu3A7c_fsw2ZIrcGKg46rl6rre8HlemIwSZjHFpY20rwMF2VwXUYoP1sYfz8os6nb/exec')
-            .then(response => response.json())
-            .then(data => {
-                var postContainer = document.getElementById('post-container');
-                data.forEach(function(item) {
-                    var content = '<div class="post">' +
-                                  '<img src="' + item.imageUrl + '" alt="' + item.title + '">' +
-                                  '<div>' +
-                                  '<h2><a href="' + item.link + '">' + item.title + '</a></h2>' +
-                                  '<p class="meta">by ' + item.author + ' on ' + item.pubDate.replace(/ \\d{2}:\\d{2}:\\d{2} [+-]\\d{4}/, '') + '</p>' +
-                                  '<p>' + item.description.replace(/<img[^>]*>/g, "") + '</p>' +
-                                  '</div>' +
-                                  '</div>';
-                    postContainer.innerHTML += content;
-                });
-            })
-            .catch(error => console.error('Error fetching the RSS feed:', error));
-    </script>
+    <h1>Simple Test Page</h1>
+    <p>This is a test page to check iframe embedding.</p>
 </body>
 </html>
