@@ -1,27 +1,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Test Page</title>
+    <title>Latest Post</title>
     <style>
-        body { font-family: Avenir, Arial, sans-serif; margin: 20px; text-align: center; }
-        h1 { color: #00bf9a; }
-        p { font-size: 18px; }
+        body {
+            font-family: Avenir, Arial, sans-serif;
+            margin: 20px;
+        }
+        .post {
+            display: flex;
+            align-items: flex-start;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .post img {
+            max-width: 400px;
+            height: auto;
+            margin-right: 20px;
+        }
+        .post div {
+            flex: 1;
+        }
+        .post h2 {
+            font-size: 24px;
+            margin: 0;
+            color: #00bf9a;
+        }
+        .post p {
+            margin: 10px 0;
+        }
+        .post .meta {
+            font-size: 14px;
+            color: #555;
+        }
+        .post a {
+            color: #00bf9a;
+            text-decoration: none;
+        }
+        .post a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 600px) {
+            .post {
+                flex-direction: column;
+                align-items: center;
+            }
+            .post img {
+                margin-right: 0;
+                margin-bottom: 20px;
+                max-width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>Simple Test Page2</h1>
-    <p>This is a test page to check iframe embedding.</p>
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Embed Google Apps Script</title>
-</head>
-<body>
-    <iframe src="https://script.google.com/macros/s/AKfycbzpBk6q7j9Itr-_Rzir9S2BTBy1NHHpnJOeliYbgC5qVscnzVhPv3zd8VklrOl8eukG/exec" width="100%" height="600" frameborder="0"></iframe>
+    <div class="post">
+        <img src="IMAGE_URL" alt="Drama Triangle">
+        <div>
+            <h2><a href="POST_URL">Navigating the Drama Triangle: Empowering Pilots Through CRM</a></h2>
+            <p class="meta">by Mark Goston on Sun, 16 Jun 2024</p>
+            <p>
+                Stephen Karpman first introduced the Drama Triangle in the 1960s, a model that outlines three dysfunctional roles people can play in conflict: the Victim, the Rescuer, and the Persecutor. Understanding this dynamic is useful for pilots who aim to maintain effective communication and teamwork in the cockpit through Crew Resource Management (CRM). In a dynamic...
+                <a href="POST_URL">Continue Reading →</a>
+            </p>
+        </div>
+    </div>
 </body>
 </html>
