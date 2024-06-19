@@ -57,16 +57,53 @@
     </style>
 </head>
 <body>
-    <div class="post">
-        <img src="IMAGE_URL" alt="Drama Triangle">
-        <div>
-            <h2><a href="POST_URL">Navigating the Drama Triangle: Empowering Pilots Through CRM</a></h2>
-            <p class="meta">by Mark Goston on Sun, 16 Jun 2024</p>
-            <p>
-                Stephen Karpman first introduced the Drama Triangle in the 1960s, a model that outlines three dysfunctional roles people can play in conflict: the Victim, the Rescuer, and the Persecutor. Understanding this dynamic is useful for pilots who aim to maintain effective communication and teamwork in the cockpit through Crew Resource Management (CRM). In a dynamic...
-                <a href="POST_URL">Continue Reading →</a>
-            </p>
-        </div>
-    </div>
+    <div id="post-container" class="post"></div>
+
+    <script>
+        const rssUrl = 'https://perspectives.pilotlifetraining.com/feed/';
+
+        fetch(rssUrl)
+            .then(response => response.text())
+            .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+            .then(data => {
+                const items = data.querySelectorAll("item");
+                const latestPost = items[0];
+
+                const title = latestPost.querySelector("title").textContent;
+                const link = latestPost.querySelector("link").textContent;
+                const description = latestPost.querySelector("description").textContent;
+                const pubDate = latestPost.querySelector("pubDate").textContent;
+                const author = latestPost.querySelector("dc\\:creator").textContent;
+
+                // Check for the featured image in media:content or media:thumbnail
+                let imageUrl = '';
+                const mediaContent = latestPost.querySelector("media\\:content");
+                const mediaThumbnail = latestPost.querySelector("media\\:thumbnail");
+
+                if (mediaContent) {
+                    imageUrl = mediaContent.getAttribute('url');
+                } else if (mediaThumbnail) {
+                    imageUrl = mediaThumbnail.getAttribute('url');
+                } else {
+                    // Fallback to checking for <img> tags in the description
+                    const imgMatch = description.match(/<img[^>]+src="([^">]+)"/);
+                    if (imgMatch) {
+                        imageUrl = imgMatch[1];
+                    }
+                }
+
+                const postContainer = document.getElementById("post-container");
+                const content = `
+                    <img src="${imageUrl}" alt="${title}">
+                    <div>
+                        <h2><a href="${link}">${title}</a></h2>
+                        <p class="meta">by ${author} on ${pubDate.replace(/ \d{2}:\d{2}:\d{2} [+-]\d{4}/, "")}</p>
+                        <p>${description.replace(/<img[^>]*>/g, "")} <a href="${link}">Continue Reading →</a></p>
+                    </div>
+                `;
+                postContainer.innerHTML = content;
+            })
+            .catch(error => console.log('Error fetching the RSS feed:', error));
+    </script>
 </body>
 </html>
